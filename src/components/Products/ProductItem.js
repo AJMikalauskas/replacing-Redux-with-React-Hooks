@@ -1,15 +1,22 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+// Context API
+import React, {useContext} from 'react';
+import {ProductsContext} from '../../context/products-context';
+//import { useDispatch } from 'react-redux';
 
 import Card from '../UI/Card';
 import './ProductItem.css';
-import { toggleFav } from '../../store/actions/products';
+//import { toggleFav } from '../../store/actions/products';
+
 
 const ProductItem = props => {
-  const dispatch = useDispatch();
+  //const dispatch = useDispatch();
+  //Context API Hook below:
+  const toggleFav = useContext(ProductsContext).toggleFav;
 
   const toggleFavHandler = () => {
-    dispatch(toggleFav(props.id));
+   // dispatch(toggleFav(props.id));
+   // Sends in id to find the index and then change the property of isFavorite in the indexed object
+   toggleFav(props.id);
   };
 
   return (
