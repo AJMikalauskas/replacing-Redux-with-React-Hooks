@@ -1,16 +1,25 @@
 import React, { useContext } from 'react';
 //import { useSelector } from 'react-redux';
 // Context API
-import { ProductsContext } from '../context/products-context';
+//import { ProductsContext } from '../context/products-context';
 import FavoriteItem from '../components/Favorites/FavoriteItem';
 import './Products.css';
+
+// custom store hook replace context API and redux
+import { useStore } from '../hooks-store/store';
 
 const Favorites = props => {
   // const favoriteProducts = useSelector(state =>
   //   state.shop.products.filter(p => p.isFavorite)
   // );
   // Filter list on based if it's a favorite by checking if isFavorite property in each object is true or false.
-  const favoriteProducts = useContext(ProductsContext).products.filter(p => p.isFavorite);
+  //const favoriteProducts = useContext(ProductsContext).products.filter(p => p.isFavorite);
+  
+  // custom useStore hook, only need state, not dispatch
+  const state = useStore()[0];
+  
+const favoriteProducts = state.products.filter(p => p.isFavorite);
+
   let content = <p className="placeholder">Got no favorites yet!</p>;
   if (favoriteProducts.length > 0) {
     content = (
